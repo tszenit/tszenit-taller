@@ -23,6 +23,15 @@ mkdir -p /home/claude/zenit/web/apps_script /home/claude/zenit/guias/entrega
 - Las fuentes Poppins y Lora vienen del sistema.
 - **Code.gs:** el usuario lo pega en el chat, desde su Apps Script. Se guarda en `/home/claude/zenit/web/apps_script/Code.gs`. Nunca se sube a ningún repositorio.
 
+## Contenido privado (cifrado)
+
+`privado/contenido.enc` contiene las fuentes de las guías y apuntes ya hechos: `q_*.py`, `c_*.py`, specs JSON, revisión PAES y `keys.json` de material. Está cifrado con AES-GCM, con una llave derivada del `ADMIN_TOKEN` de Code.gs (PBKDF2-SHA256, 310 000 iteraciones). Sin el Code.gs del usuario no se puede leer.
+
+```bash
+python3 /home/claude/zenit/guias/privado.py abrir     # restaura los archivos (requiere Code.gs en web/apps_script/)
+python3 /home/claude/zenit/guias/privado.py guardar   # después de crear o cambiar contenido: vuelve a cifrar
+```
+
 ## Estructura
 
 | Carpeta | Qué hay |
