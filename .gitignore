@@ -1,0 +1,16 @@
+# contenido pagado y secretos: nunca en este repositorio público
+web/
+**/keys.json
+**/out/
+guias/entrega/
+guias/q_*.py
+qim/c_*.py
+pre/c_*.py
+paes/
+*.bin
+*.pdf
+X.json
+.env
+# entorno
+tools/node_modules/
+__pycache__/

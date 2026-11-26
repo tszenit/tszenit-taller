@@ -1,0 +1,180 @@
+<!doctype html><html lang="es" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I1 · Límites · Slides Cálculo 1 · TS Zenit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0B1A33; --deep:#081428; --surface:#11264B; --surface-2:#17315C; --line:#2A4775; --ink:#F2F4F9; --muted:#B7C3DA;
+  --latte:#D8A878; --gold:#F5A524; --ok:#7FD4A8; --bad:#F2867E; --warn:#F2C46D;
+  --accent:#7DD3FC; --accent-soft:rgba(125, 211, 252, 0.15); --accent-line:rgba(125, 211, 252, 0.42); --accent-glow:rgba(125, 211, 252, 0.26); --accent-ink:#0B1A33;
+  --f-d:"Poppins","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-b:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-m:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --u:min(1vw, 1.75vh);
+  --t-xs:clamp(11px, calc(var(--u)*1.05), 15px);
+  --t-s:clamp(14px, calc(var(--u)*1.35), 19px);
+  --t-b:clamp(16px, calc(var(--u)*1.7), 25px);
+  --t-l:clamp(19px, calc(var(--u)*2.2), 32px);
+  --t-h:clamp(26px, calc(var(--u)*3.6), 56px);
+  --t-x:clamp(38px, calc(var(--u)*6.4), 104px);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-b); font-size:var(--t-b); line-height:1.45; -webkit-font-smoothing:antialiased; overflow:hidden}
+[hidden]{display:none!important}
+button{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--latte); outline-offset:3px; border-radius:6px}
+h1,h2,h3{font-family:var(--f-d); margin:0; line-height:1.08; letter-spacing:-.02em; text-wrap:balance}
+p{margin:0}
+b,strong{font-weight:600}
+sub,sup{font-size:.7em; line-height:0}
+.f{font-family:var(--f-m); white-space:nowrap}
+.acc{color:var(--accent)} .lat{color:var(--latte)} .mut{color:var(--muted)}
+
+/* ---- marco ---- */
+.app{position:fixed; inset:0; display:grid; grid-template-rows:auto 1fr auto; background:radial-gradient(90% 70% at 100% 0%, var(--accent-glow), transparent 60%), radial-gradient(70% 60% at 0% 100%, rgba(216,168,120,.08), transparent 60%), var(--bg)}
+.top{display:flex; align-items:center; gap:12px; padding:10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); padding-top:max(10px, env(safe-area-inset-top, 0px)); border-bottom:1px solid rgba(42,71,117,.6)}
+.brand{display:flex; align-items:center; gap:8px; font:700 14px/1 var(--f-d); white-space:nowrap}
+.brand svg{width:18px; height:18px; color:var(--gold)}
+.brand span{color:var(--muted); font-weight:500}
+.top .sp{flex:1}
+.cnt{font:500 13px/1 var(--f-m); color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
+.tb{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line); background:rgba(17,38,75,.7); color:var(--ink); border-radius:999px; padding:8px 13px; font:600 13px/1 var(--f-d); cursor:pointer}
+.tb:hover{border-color:var(--accent)}
+.tb svg{width:15px; height:15px}
+.deck{position:relative; overflow:hidden}
+.s{position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; display:grid; align-content:center; padding:clamp(14px, calc(var(--u)*2.4), 44px) max(18px, calc(var(--u)*6)); opacity:0; visibility:hidden; transform:translateX(24px); transition:opacity .28s ease, transform .28s ease, visibility 0s linear .28s}
+.s.on{opacity:1; visibility:visible; transform:none; transition:opacity .28s ease, transform .28s ease}
+.s.back{transform:translateX(-24px)}
+@media (prefers-reduced-motion:reduce){ .s,.s.on{transition:none; transform:none} }
+.in{width:100%; max-width:1180px; margin:0 auto; display:grid; gap:clamp(10px, calc(var(--u)*1.5), 26px); min-width:0}
+.bot{display:flex; align-items:center; gap:12px; padding:10px max(16px, env(safe-area-inset-right, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+.nb{width:46px; height:46px; flex:none; border-radius:50%; border:1px solid var(--line); background:var(--surface); color:var(--ink); display:grid; place-items:center; cursor:pointer}
+.nb:hover:not(:disabled){border-color:var(--accent); color:var(--accent)}
+.nb:disabled{opacity:.35; cursor:default}
+.nb svg{width:20px; height:20px}
+.prog{flex:1; height:6px; border-radius:999px; background:var(--surface-2); overflow:hidden}
+.prog span{display:block; height:100%; width:0; background:linear-gradient(90deg, var(--latte), var(--accent)); border-radius:999px; transition:width .3s ease}
+.lic{font:500 11px/1.3 var(--f-d); color:var(--muted); text-align:center; padding:0 16px 8px; opacity:.75}
+
+/* ---- piezas ---- */
+.k{font:600 var(--t-xs)/1.2 var(--f-d); letter-spacing:.16em; text-transform:uppercase; color:var(--accent)}
+.k.l{color:var(--latte)}
+h2{font-size:var(--t-h)}
+h3{font-size:var(--t-l); font-weight:600}
+.lead{font-size:var(--t-l); color:#DCE3F0; max-width:44ch}
+.cols{display:grid; grid-template-columns:repeat(var(--c, 2), minmax(0, 1fr)); gap:clamp(12px, calc(var(--u)*1.8), 26px)}
+.card{background:linear-gradient(180deg, rgba(17,38,75,.95), rgba(17,38,75,.6)); border:1px solid var(--line); border-radius:18px; padding:clamp(14px, calc(var(--u)*1.8), 26px); display:grid; gap:.45em; align-content:start; min-width:0}
+.card h3{font-size:var(--t-b)}
+.card p,.card li{font-size:var(--t-s); color:#DCE3F0}
+.card .n{font:700 var(--t-l)/1 var(--f-d); color:var(--accent)}
+.card.a{border-color:var(--accent-line); background:linear-gradient(160deg, var(--accent-soft), rgba(17,38,75,.6))}
+ul.l{list-style:none; margin:0; padding:0; display:grid; gap:.55em}
+ul.l li{position:relative; padding-left:1.25em}
+ul.l li::before{content:""; position:absolute; left:0; top:.55em; width:.55em; height:.55em; border-radius:3px; background:var(--accent); transform:rotate(45deg) scale(.8)}
+.fx{font:600 var(--t-l)/1.25 var(--f-m); color:var(--ink); background:var(--deep); border:1px solid var(--accent-line); border-radius:16px; padding:.7em 1em; display:flex; flex-wrap:wrap; gap:.3em 1.4em; align-items:baseline; justify-content:center; text-align:center}
+.fx em{font-style:normal; color:var(--accent)}
+.fx small{font:500 var(--t-xs) var(--f-d); color:var(--muted); letter-spacing:.05em; width:100%}
+.box{border-radius:16px; padding:clamp(12px, calc(var(--u)*1.6), 22px) clamp(14px, calc(var(--u)*2), 26px); display:grid; gap:.35em; font-size:var(--t-s)}
+.box .k{font-size:var(--t-xs)}
+.box.trap{background:linear-gradient(90deg, rgba(242,196,109,.14), rgba(17,38,75,.4)); border:1px solid rgba(242,196,109,.3); border-left:4px solid var(--warn)}
+.box.trap .k{color:var(--warn)}
+.box.key{background:linear-gradient(90deg, var(--accent-soft), rgba(17,38,75,.4)); border:1px solid var(--accent-line); border-left:4px solid var(--accent)}
+.box.lat{background:linear-gradient(90deg, rgba(216,168,120,.12), rgba(17,38,75,.4)); border:1px solid rgba(216,168,120,.3); border-left:4px solid var(--latte)}
+.box.lat .k{color:var(--latte)}
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:16px; background:rgba(17,38,75,.75)}
+table{border-collapse:collapse; width:100%; font-size:var(--t-s)}
+th,td{padding:.55em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font:600 var(--t-xs)/1.2 var(--f-d); letter-spacing:.1em; text-transform:uppercase; color:var(--muted); background:#0F2245}
+td:first-child{font-weight:600}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{font:500 var(--t-xs)/1 var(--f-d); border:1px solid var(--line); background:rgba(8,20,40,.55); border-radius:999px; padding:.6em 1em}
+.chip b{color:var(--accent); font-weight:600}
+.dia{display:grid; place-items:center}
+.dia svg{width:100%; height:auto; max-height:min(46vh, 420px); display:block}
+.card .dia svg{max-height:min(22vh, 190px)}
+.dia .cap{font:500 var(--t-xs) var(--f-d); color:var(--muted); text-align:center; margin-top:.4em}
+svg .ax{stroke:var(--muted); stroke-width:1.5; fill:none}
+svg .gr{stroke:var(--line); stroke-width:1}
+svg .ln{fill:none; stroke:var(--accent); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round}
+svg .ln2{fill:none; stroke:var(--latte); stroke-width:3; stroke-linecap:round; stroke-linejoin:round}
+svg .ds{stroke-dasharray:6 6}
+svg text{fill:var(--muted); font:500 15px var(--f-d)}
+svg text.t{fill:var(--ink); font-weight:600}
+svg text.a{fill:var(--accent); font-weight:600}
+svg .fa{fill:var(--accent)} svg .fl{fill:var(--latte)} svg .fs{fill:var(--surface)} svg .fs2{fill:var(--surface-2)}
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:.5em; font-size:var(--t-s)}
+.flow span{border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:.45em .8em}
+.flow span.a{border-color:var(--accent-line); background:var(--accent-soft)}
+.flow i{font-style:normal; color:var(--accent); font-family:var(--f-m); font-weight:600}
+
+/* portada y separadores */
+.cover .in{gap:clamp(14px, calc(var(--u)*2.4), 34px)}
+.cover h1{font-size:var(--t-x); letter-spacing:-.035em; line-height:.95}
+.cover h1 em{display:block; font-style:normal; color:var(--accent); font-size:.42em; letter-spacing:-.01em; margin-top:.3em}
+.cover .art{position:absolute; right:-2%; top:6%; width:min(52vw, 640px); color:var(--accent); opacity:.22; pointer-events:none}
+.cover .art svg{width:100%; height:auto}
+.sec .in{gap:clamp(10px, calc(var(--u)*1.6), 22px)}
+.sec .num{font:700 calc(var(--t-x)*1.3)/.9 var(--f-d); color:transparent; -webkit-text-stroke:2px var(--accent); letter-spacing:-.04em}
+.sec h2{font-size:calc(var(--t-h)*1.25)}
+.map{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap:12px}
+.map .card{gap:.25em; padding:clamp(10px, calc(var(--u)*1.3), 20px) clamp(12px, calc(var(--u)*1.5), 22px)}
+.map .card .n{font-size:var(--t-s); font-family:var(--f-m); color:var(--accent)}
+
+/* pregunta */
+.q .stem{font-size:var(--t-l); max-width:56ch}
+.opts{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px}
+.opt{display:flex; gap:.7em; align-items:center; text-align:left; border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:.7em .9em; font-size:var(--t-s); cursor:pointer}
+.opt b{flex:none; width:1.9em; height:1.9em; display:grid; place-items:center; border:1px solid var(--line); border-radius:8px; font:600 var(--t-xs) var(--f-m)}
+.opt:hover:not(:disabled){border-color:var(--accent-line)}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--ok); background:rgba(127,212,168,.14)} .opt.ok b{border-color:var(--ok); color:var(--ok)}
+.opt.no{border-color:var(--bad); background:rgba(242,134,126,.12)} .opt.no b{border-color:var(--bad); color:var(--bad)}
+.why{font-size:var(--t-s)}
+.chk{list-style:none; margin:0; padding:0; display:grid; gap:10px; grid-template-columns:repeat(2, minmax(0, 1fr))}
+.chk label{display:flex; gap:.7em; align-items:flex-start; border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:.75em .9em; font-size:var(--t-s); cursor:pointer}
+.chk input{width:1.15em; height:1.15em; margin-top:.15em; accent-color:var(--accent); flex:none}
+
+/* índice */
+.idx{position:fixed; inset:0; z-index:5; background:rgba(5,12,26,.86); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); overflow-y:auto; padding:max(18px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px))}
+.idx .hd{max-width:1100px; margin:0 auto 14px; display:flex; justify-content:space-between; align-items:center; gap:12px}
+.idx h2{font-size:22px}
+.idx .g{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap:10px}
+.idx .g button{text-align:left; display:grid; gap:4px; border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:12px 14px; cursor:pointer}
+.idx .g button span{font:500 12px var(--f-m); color:var(--accent)}
+.idx .g button b{font:600 15px/1.25 var(--f-d)}
+.idx .g button[aria-current="true"]{border-color:var(--accent); background:linear-gradient(160deg, var(--accent-soft), var(--surface))}
+
+@media (max-width:760px), (orientation:portrait){
+  .cols{grid-template-columns:minmax(0, 1fr)}
+  .opts,.chk{grid-template-columns:minmax(0, 1fr)}
+  .s{align-content:start}
+  .cover,.sec{align-content:center}
+  .cover .art{width:90vw; top:4%; opacity:.16}
+  .card .dia svg{max-height:17vh}
+  .dia svg{max-height:30vh}
+}
+@media (max-width:560px){ .brand span,.tb .tx{display:none} .tb{padding:9px} }
+math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Noto Sans Math",math;math-style:normal}
+.fx math{font-size:1.1em}
+.card p math,.card h3 math{font-size:1.18em}
+.opt math,.stem math{font-size:1.12em}
+.box p math{font-size:1.1em}
+.s .in{min-width:0;max-width:100%}
+.fx{max-width:100%;min-width:0;overflow-x:auto}
+.fx>span{min-width:0;max-width:100%}
+.cols>.card{min-width:0;overflow-x:auto}
+@media (max-width:600px){.fx math{font-size:.95em}.card p math,.card h3 math{font-size:1.05em}}
+@media (max-width:600px){.cols[style*="--c:4"],.cols[style*="--c:5"]{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head><body>
+<div class="app">
+  <header class="top">
+    <span class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 16.8l-5.8 3.5 1.6-6.6-5.2-4.4 6.8-.5z" fill="currentColor"/></svg>TS Zenit <span>· Slides I1 · Límites</span></span>
+    <span class="sp"></span>
+    <span class="cnt" id="cnt" aria-live="polite">1 / 1</span>
+    <button class="tb" type="button" id="bIdx" aria-label="Índice de slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg><span class="tx">Índice</span></button>
+    <button class="tb" type="button" id="bFs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="tx">Pantalla completa</span></button>
+  </header>
+  <main class="deck" id="deck">
