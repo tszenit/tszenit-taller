@@ -14,3 +14,4 @@ X.json
 # entorno
 tools/node_modules/
 __pycache__/
+guias/formulario_*.py

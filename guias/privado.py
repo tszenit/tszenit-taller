@@ -9,7 +9,7 @@ from cryptography.hazmat.primitives import hashes
 Z = pathlib.Path("/home/claude/zenit"); ENC = Z / "privado" / "contenido.enc"
 CODE = Z / "web/apps_script/Code.gs"
 PATRONES = ["guias/q_*.py", "guias/bin.py", "guias/cpo.py", "guias/cpx.py", "guias/gra.py", "guias/itr.py",
-            "guias/out/*.json", "qim/c_*.py", "pre/c_*.py", "qim/keys.json", "pre/keys.json",
+            "guias/out/*.json", "guias/formulario_*.py", "qim/c_*.py", "pre/c_*.py", "qim/keys.json", "pre/keys.json",
             "paes/*.json", "paes/*.py", "paes/run.sh", "paes/repl/**/*"]
 def llave(sal):
     tok = re.search(r'const ADMIN_TOKEN = "([0-9a-f]+)"', CODE.read_text()).group(1)
